@@ -68,7 +68,10 @@
                 if (div.textContent === event.key) {
                     if (event.type === 'keydown') {
                         audio = document.querySelector(`audio[data-key="${event.key}"]`);
-                        if (audio) audio.play();
+                        if (audio) {
+                            audio.currentTime = 0;
+                            audio.play()
+                        }
                         div.classList.add('active');
                     } else if (event.type === 'keyup') {
                         div.classList.remove('active');
@@ -77,22 +80,9 @@
             });
         }
 
-
         document.addEventListener('keydown', checkKey);
         document.addEventListener('keyup', checkKey);
 
-        // document.addEventListener('keydown', e => {
-        //     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        //     const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
-        //     if (!audio) return;
-        //     audio.currentTime = 0;
-        //     audio.play();
-        //     div.classList.add('active');
-        // });
-        // document.addEventListener('keyup', e => {
-        //     const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
-        //     div.classList.remove('active');
-        // });
     </script>
 </body>
 </html>

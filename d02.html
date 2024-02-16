@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS + JS Clock</title>
+    <style>
+        body {
+            background-color: #1b1b32;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .clock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40svh;
+            width: 40svh;
+            border: 0.7rem solid white;
+            border-radius: 50%;
+            background-color: #0f0f1a;
+        }
+
+        .arrow {
+            background-color: #ffffff;
+            position: absolute;
+            width: 0.7rem;
+            height: 0.7rem;
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            
+        }
+
+        .hour {
+            /* border-radius: 1rem; */
+            width: 10svh;
+            transform: rotate(45deg);
+        }
+
+        .min {
+            width: 15svh;
+            transform: rotate(90deg);
+        }
+
+        .sec {
+            width: 17svh;
+            height: 0.4rem;
+            transform: rotate(135deg);
+        }
+
+        .center {
+            position: absolute;
+            width: 1.2rem;
+            height: 1.2rem;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    
+    <div class="clock">
+        <div class="arrow hour"></div>
+        <div class="arrow min"></div>
+        <div class="arrow sec"></div>
+        <!-- <div class="center"></div> -->
+    </div>
+
+    <script>
+
+
+    </script>
+</body>
+</html>

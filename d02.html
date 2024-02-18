@@ -15,10 +15,14 @@
             height: 100vh;
         }
 
+        h3 {
+            color:#ffffff;
+        }
+
         .clock {
-            display: flex;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
             height: 40svh;
             width: 40svh;
             border: 0.7rem solid white;
@@ -33,25 +37,29 @@
             height: 0.7rem;
             top: 50%;
             left: 50%;
-            transform-origin: left center;
-            
+            transform-origin: 0% 0%;
+            /* transition: all 0.5s; */
+            /* transform: rotate(-90deg); */
         }
 
         .hour {
             /* border-radius: 1rem; */
             width: 10svh;
-            transform: rotate(45deg);
+            background-color: blue;
         }
 
         .min {
             width: 15svh;
-            transform: rotate(90deg);
+            background-color: green;
+
         }
 
         .sec {
+            top: calc(50% + 0.2rem);
             width: 17svh;
             height: 0.4rem;
-            transform: rotate(135deg);
+            background-color: red;
+
         }
 
         .center {
@@ -63,6 +71,12 @@
             z-index: 10;
         }
 
+        .info {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
 
         
     </style>
@@ -75,9 +89,37 @@
         <div class="arrow sec"></div>
         <!-- <div class="center"></div> -->
     </div>
+    
+    <div class="info">
+        <div class="time"></div>
+        <div class="position"></div>
+    </div>
 
     <script>
 
+
+        hourArrow = document.querySelector('.hour');
+        minArrow = document.querySelector('.min');
+        secArrow = document.querySelector('.sec');
+        showTime = document.querySelector('.time');
+        showPosition = document.querySelector('.position');
+
+        setInterval(() => {
+            currentTime = new Date();
+            hour = currentTime.getHours();
+            min = currentTime.getMinutes();
+            sec = currentTime.getSeconds();
+            showTime.innerHTML = `<h3>Time: [ ${hour} : ${min} : ${sec} ]</h3>`;
+            showPosition.innerHTML = `<h3>Position [ ${hour * 30-90} : ${min * 6-90} : ${sec * 6-90} ]</h3>`
+            changeTime();
+        }, 1000);
+
+        function changeTime() {
+            hourArrow.style.transform = `rotate(${hour * 30-90}deg)`;
+            minArrow.style.transform = `rotate(${min * 6-90}deg)`;
+            secArrow.style.transform = `rotate(${sec * 6-90}deg)`;
+            requestAnimationFrame(changeTime);
+        }
 
     </script>
 </body>

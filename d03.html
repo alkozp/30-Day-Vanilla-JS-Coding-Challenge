@@ -5,15 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playing with CSS Variables and JS</title>
     <style>
+        :root {
+            --spacing: 0;
+            --blur: 0;
+            --base-color: #00a6ff
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 100svh;
+            background-color: #00a6ff;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .picture img {
+            height: auto;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+            padding-top: var(--spacing);
+            padding-left: var(--spacing);
+            filter: blur(var(--blur));
+            background-color: var(--base-color);
+        }
 
     </style>
 </head>
 <body>
 
-    
+    <div class="box">
+        <div class="options">
+
+            <label for="spacing">Spacing:</label>
+            <input type="range" name="spacing" id="spacing" min="0" max="200" value="0">
+
+            <label for="blur">Blur:</label>
+            <input type="range" name="blur" id="blur" min="0" max="50" value="0">
+
+
+            <div>
+                <label for="color">Base color:</label>
+                <input type="color" name="color" id="bg-color" value="#00a6ff">
+            </div>
+        </div>
+        <div class="picture">
+            <img src="https://i.pinimg.com/originals/3d/8d/d8/3d8dd8fb5efdfd2ecedae9d47e1a1737.jpg" alt="css meme">    
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 0; right: 0; padding: 1rem;"><a href="https://intechgration.io" target="_blank" style="text-decoration: none; color: gray">in<span style="color: black;">tech</span>gration 2024</a></div>
 
     <script>
 
+        function makeChange(event) {
+            console.log(event.target.value);
+            const pic = document.querySelector('.picture img');
+
+            const spacing = event.target.id === 'spacing' ? event.target.value + 'px' : pic.style.getPropertyValue('padding-top');
+            const blur = event.target.id === 'blur' ? event.target.value + 'px' : pic.style.getPropertyValue('filter');
+            const color = event.target.id === 'bg-color' ? event.target.value : pic.style.getPropertyValue('background-color');
+            console.log(spacing, blur, color);
+            
+            pic.style.setProperty('padding-top', spacing);
+            pic.style.setProperty('padding-left', spacing );
+            pic.style.setProperty('filter', 'blur(' + blur + ')');
+            pic.style.setProperty('background-color', color);
+        }
+
+        document.querySelector('.box').addEventListener('input', makeChange);
     </script>
 </body>
 </html>

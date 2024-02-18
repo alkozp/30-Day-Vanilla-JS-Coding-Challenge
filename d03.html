@@ -47,15 +47,15 @@
         <div class="options">
 
             <label for="spacing">Spacing:</label>
-            <input type="range" name="spacing" id="spacing" min="0" max="200" value="0">
+            <input type="range" name="spacing" id="spacing" min="0" max="200" value="0" data-sizing="px">
 
             <label for="blur">Blur:</label>
-            <input type="range" name="blur" id="blur" min="0" max="50" value="0">
+            <input type="range" name="blur" id="blur" min="0" max="50" value="0" data-sizing="px">
 
 
             <div>
                 <label for="color">Base color:</label>
-                <input type="color" name="color" id="bg-color" value="#00a6ff">
+                <input type="color" name="base-color" id="bg-color" value="#00a6ff" data-sizing="">
             </div>
         </div>
         <div class="picture">
@@ -63,23 +63,11 @@
         </div>
     </div>
 
-    <div style="position: absolute; bottom: 0; right: 0; padding: 1rem;"><a href="https://intechgration.io" target="_blank" style="text-decoration: none; color: gray">in<span style="color: black;">tech</span>gration 2024</a></div>
+    <div style="position: absolute; bottom: 0; right: 0; padding: 1rem; border: 1px solid rgb(101, 101, 101); background-color:#ffffffce"><a href="https://intechgration.io" target="_blank" style="text-decoration: none; color: gray">in<span style="color: black;">tech</span>gration 2024</a></div>
 
     <script>
-
         function makeChange(event) {
-            console.log(event.target.value);
-            const pic = document.querySelector('.picture img');
-
-            const spacing = event.target.id === 'spacing' ? event.target.value + 'px' : pic.style.getPropertyValue('padding-top');
-            const blur = event.target.id === 'blur' ? event.target.value + 'px' : pic.style.getPropertyValue('filter');
-            const color = event.target.id === 'bg-color' ? event.target.value : pic.style.getPropertyValue('background-color');
-            console.log(spacing, blur, color);
-            
-            pic.style.setProperty('padding-top', spacing);
-            pic.style.setProperty('padding-left', spacing );
-            pic.style.setProperty('filter', 'blur(' + blur + ')');
-            pic.style.setProperty('background-color', color);
+            this.style.setProperty(`--${event.target.name}`, event.target.value + event.target.dataset.sizing);
         }
 
         document.querySelector('.box').addEventListener('input', makeChange);
